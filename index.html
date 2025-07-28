@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- saved from url=(0128)file:///C:/Users/82104/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/index%20(1).html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>건강 상태 자가 점검</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+        h1 { color: #2c3e50; }
+        label { display: block; margin-top: 10px; }
+        input[type="number"], input[type="text"] {
+            width: 200px; padding: 5px; margin-top: 5px;
+        }
+        button { margin-top: 15px; padding: 10px 20px; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>건강 상태 자가 점검</h1>
+    <label>체온 (℃):
+        <input type="number" id="temperature" step="0.1">
+    </label>
+    <label>심박수 (bpm):
+        <input type="number" id="heartrate">
+    </label>
+    <label>수면 시간 (시간):
+        <input type="number" id="sleep">
+    </label>
+    <label>스트레스 정도 (낮음/보통/높음):
+        <input type="text" id="stress">
+    </label>
+    <button onclick="checkHealth()">확인하기</button>
+
+    <div id="result"></div>
+
+    <script>
+        function checkHealth() {
+            const temp = parseFloat(document.getElementById('temperature').value);
+            const heart = parseInt(document.getElementById('heartrate').value);
+            const sleep = parseFloat(document.getElementById('sleep').value);
+            const stress = document.getElementById('stress').value.trim().toLowerCase();
+
+            let result = "";
+
+            if (temp >= 36.1 && temp <= 37.2) {
+                result += "체온 정상<br>";
+            } else {
+                result += "<span style='color:red;'>체온 비정상</span><br>";
+            }
+
+            if (heart >= 60 && heart <= 100) {
+                result += "심박수 정상<br>";
+            } else {
+                result += "<span style='color:red;'>심박수 비정상</span><br>";
+            }
+
+            if (sleep >= 7 && sleep <= 9) {
+                result += "수면 시간 적절<br>";
+            } else {
+                result += "<span style='color:red;'>수면 시간 부족/과다</span><br>";
+            }
+
+            if (stress === "낮음") {
+                result += "스트레스 낮음<br>";
+            } else if (stress === "보통") {
+                result += "스트레스 보통<br>";
+            } else if (stress === "높음") {
+                result += "<span style='color:red;'>스트레스 높음</span><br>";
+            } else {
+                result += "<span style='color:red;'>스트레스 입력 오류 (낮음/보통/높음으로 입력)</span><br>";
+            }
+
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+
+
+</body></html>
